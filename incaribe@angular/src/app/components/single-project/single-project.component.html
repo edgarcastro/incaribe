@@ -1,0 +1,25 @@
+<div *ngIf="project">
+  <h3>{{project.name}}</h3>
+  <h4>{{project.director}}</h4>
+  <span>{{project.startDate}}</span>
+  <span>{{project.endDate}}</span>
+
+  <form (submit)="edit()">
+    <div class="form-group">
+      <label for="name">Nombre:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="project.name">
+    </div>
+    <div class="form-group">
+      <label for="startDate">Fecha de inicio:</label>
+      <input type="date" id="startDate" name="startDate" [(ngModel)]="project.startDate">
+    </div>
+    <div class="form-group">
+      <label for="endDate">Fecha de fin:</label>
+      <input type="date" id="endDate" name="endDate" [(ngModel)]="project.endDate">
+    </div>
+    <button type="submit" class="btn btn-success">Guardar</button>
+  </form>
+
+  <button type="button" class="btn btn-danger" (click)="delete()">Eliminar</button>
+</div>
+<gantt-chart></gantt-chart>
