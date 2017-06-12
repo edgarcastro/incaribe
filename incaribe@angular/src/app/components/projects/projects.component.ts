@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { ProjectsService } from './projects.service';
 import { Project } from './project.model'
+
 
 @Component({
   selector: 'projects',
@@ -12,8 +14,12 @@ import { Project } from './project.model'
 export class ProjectsComponent implements OnInit {
   project: Project;
   projects: Array<Project>;
+  date: DateModel;
+  options: DatePickerOptions;
 
-  constructor(private router: Router, private projectsService: ProjectsService) { }
+  constructor(private router: Router, private projectsService: ProjectsService) { 
+    this.options = new DatePickerOptions();
+  }
 
   ngOnInit() {
     this.project = new Project();
