@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { ProjectsService } from './projects.service';
-import { Project } from './project.model'
+import { Project } from '../../models/project.model'
 
 
 @Component({
