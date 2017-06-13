@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SingleProjectService } from './single-project.service';
-import { Project } from './project.model'
+import { Project } from '../../models/project.model'
 
 @Component({
   selector: 'app-single-project',
@@ -28,7 +28,7 @@ export class SingleProjectComponent implements OnInit {
     this.singleProjectService.getProject(this.id)
     .then(res => {
       if(!res.err){
-        this.project = res.project;
+        this.project = res.project as Project;
       }else{
         console.log(res);
       }

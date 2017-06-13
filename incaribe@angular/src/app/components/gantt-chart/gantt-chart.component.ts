@@ -27,6 +27,13 @@ export class GanttChartComponent implements OnInit {
   }
 
   ngOnInit() {
+    gantt.config.columns=[
+      {name:"text",       label:"Nombre",  tree:true, width:'*' },
+      {name:"start_date", label:"Inicio", align: "center" },
+      {name:"duration",   label:"Duración",   align: "center" },
+      {name:"add",        label:"" }
+    ];
+    gantt.config.autosize = "y";
     gantt.config.xml_date = "%Y-%m-%d %H:%i";
     gantt.init(this.ganttContainer.nativeElement);
 

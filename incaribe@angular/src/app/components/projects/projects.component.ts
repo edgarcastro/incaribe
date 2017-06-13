@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 import { ProjectsService } from './projects.service';
-import { Project } from './project.model'
+import { Project } from '../../models/project.model'
 
 
 @Component({
@@ -13,9 +13,11 @@ import { Project } from './project.model'
 })
 export class ProjectsComponent implements OnInit {
   project: Project;
-  projects: Array<Project>;
+  projects: Project[] = [];
   date: DateModel;
   options: DatePickerOptions;
+  public sortBy = "name";
+  public sortOrder = "asc";
 
   constructor(private router: Router, private projectsService: ProjectsService) { 
     this.options = new DatePickerOptions();
@@ -23,7 +25,6 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit() {
     this.project = new Project();
-    this.projects = new Array();
     this.load();
   }
 
