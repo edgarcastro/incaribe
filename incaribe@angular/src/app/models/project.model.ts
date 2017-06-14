@@ -1,16 +1,20 @@
-import {Activity} from './activity.model'
+import {Task} from './task.model';
+import {Link} from './link.model';
+
 export class Project {
+    _id: String;
     name: String;
     director: String;
     startDate: Date;
     endDate: Date;
-    activities: Activity[];
+    tasks: Task[];
+    dependencies: Link[]
 
     constructor(){
         this.name = '';
-        this.director = ''
         this.startDate = new Date();
         this.endDate = new Date();
-        this.activities = [];
+        this.tasks = [];
+        this.dependencies = [];
     }
 }

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { DatePickerModule } from 'ng2-datepicker';
+import { Daterangepicker } from 'ng2-daterangepicker';
 import {DataTableModule} from "angular2-datatable";
 import { AppComponent } from './app.component';
 import { GanttChartComponent } from './components/gantt-chart/gantt-chart.component';
@@ -22,7 +22,7 @@ import { app_routing } from './app.routes';
     BrowserModule,
     FormsModule,
     HttpModule,
-    DatePickerModule,
+    Daterangepicker,
     DataTableModule,
     app_routing
   ],

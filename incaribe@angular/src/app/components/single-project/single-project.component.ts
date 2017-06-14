@@ -1,19 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SingleProjectService } from './single-project.service';
+import { ProjectService } from '../../services/project.service';
 import { Project } from '../../models/project.model'
 
 @Component({
   selector: 'app-single-project',
   templateUrl: './single-project.component.html',
   styleUrls: ['./single-project.component.css'],
-  providers: [SingleProjectService]
+  providers: [ProjectService]
 })
 export class SingleProjectComponent implements OnInit {
   id: String;
   project: Project;
 
-  constructor(private router: Router, private route: ActivatedRoute, private singleProjectService: SingleProjectService) { }
+  constructor(private router: Router, private route: ActivatedRoute, private projectService: ProjectService) { }
 
   ngOnInit() {
     this.route.params.subscribe(params => {
@@ -25,7 +25,7 @@ export class SingleProjectComponent implements OnInit {
   }
 
   load(){
-    this.singleProjectService.getProject(this.id)
+    this.projectService.getProject(this.id)
     .then(res => {
       if(!res.err){
         this.project = res.project as Project;
@@ -36,7 +36,7 @@ export class SingleProjectComponent implements OnInit {
   }
 
   edit(){
-    this.singleProjectService.putProject(this.id, this.project)
+    this.projectService.putProject(this.id, this.project)
     .then(res => {
       console.log(res);
       if(!res.err){
@@ -48,7 +48,7 @@ export class SingleProjectComponent implements OnInit {
   }
 
   delete(){
-    this.singleProjectService.deleteProject(this.id)
+    this.projectService.deleteProject(this.id)
     .then(res => {
       console.log(res);
       if(!res.err){
@@ -58,6 +58,10 @@ export class SingleProjectComponent implements OnInit {
         console.log(res);
       }
     })
+  }
+
+  back(){
+    this.router.navigate(['/projects']);
   }
 
 }
