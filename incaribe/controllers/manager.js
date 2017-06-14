@@ -1,125 +1,30 @@
 const express = require('express');
 const Project = require('../models/Project');
+var bodyParser = require('body-parser');
+var user_routes = require('../routes/user');
+var project_routes = require('../routes/project');
 
-const router = express.Router();
+const router = express();
 
-router.get('/projects', (req, res) => {
-    Project.find({
-        //conditions
-    }, {
-        //projection
-    }, (err, projects) => {
-        if (err) {
-            res.json({
-                'error': true,
-                'errorMesseage': err
-            });
-        } else {
-            res.json({
-                'error': false,
-                'projects': projects
-            });
-        }
-    });
+router.use(bodyParser.urlencoded({extended:false}));
+router.use(bodyParser.json());
+
+
+//Rutas
+/* edgar tus rutas las mande a la carpeta routes, mira el archivo project para que veas */
+
+//configurar cabeceras http
+router.use((req, res, next) =>{
+	res.header('Access-Control-Allow-Origin', '*');
+	res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method, X-XSRF-TOKEN');
+	res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+	res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+
+	next();
 });
 
-router.get('/projects/:id', (req, res) => {
-    if (req.params.id) {
-        Project.findById(req.params.id, {
-            //projection
-        }, (err, project) => {
-            if (err) {
-                res.json({
-                    'error': true,
-                    'errorMesseage': err
-                });
-            } else {
-                res.json({
-                    'error': false,
-                    'project': project
-                });
-            }
-        });
-    } else {
-        res.json({
-            'error': true,
-            'errorMesseage': 'NOT PARAMS'
-        });
-    }
-});
+router.use('', user_routes);
+router.use('', project_routes);
 
-router.post('/projects', (req, res) => {
-    if (req.body.project) {
-        let p = new Project(req.body.project);
-        p.save((err, project, numAffected) => {
-            if (err) {
-                res.json({
-                    'error': true,
-                    'errorMesseage': err
-                });
-            } else {
-                res.json({
-                    'error': false,
-                    'project': p
-                });
-            }
-        });
-    } else {
-        res.json({
-            'error': true,
-            'errorMesseage': 'NOT PARAMS'
-        });
-    }
-});
-
-router.put('/projects/:id', (req, res) => {
-    if (req.params.id && req.body.project) {
-        Project.findByIdAndUpdate(req.params.id, req.body.project, {
-            'new': true
-        }, (err, project) => {
-            if (err) {
-                res.json({
-                    'error': true,
-                    'errorMesseage': err
-                });
-            } else {
-                res.json({
-                    'error': false,
-                    'project': project
-                });
-            }
-        });
-    } else {
-        res.json({
-            'error': true,
-            'errorMesseage': 'NOT PARAMS'
-        });
-    }
-});
-
-router.delete('/projects/:id', (req, res) => {
-    if (req.params.id) {
-        Project.findByIdAndRemove(req.params.id, {
-            'new': false
-        }, (err, project) => {
-            if (err) {
-                res.json({
-                    'error': true,
-                    'errorMesseage': err
-                });
-            } else {
-                res.json({
-                    'error': false,
-                    'project': project
-                });
-            }
-        });
-    } else {
-        res.json({
-            'error': true,
-            'errorMesseage': 'NOT PARAMS'
-        });
-    }
-});
 
 module.exports = router;
