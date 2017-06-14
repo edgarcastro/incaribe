@@ -8,15 +8,17 @@ import { AppComponent } from './app.component';
 import { GanttChartComponent } from './components/gantt-chart/gantt-chart.component';
 import { ProjectsComponent } from './components/projects/projects.component';
 import { SingleProjectComponent } from './components/single-project/single-project.component';
+import { LoginComponent } from './components/login/login.component';
 
-import { app_routing } from './app.routes';
+import { app_routing, appRoutingProviders } from './app.routes';
 
 @NgModule({
   declarations: [
     AppComponent,
     GanttChartComponent,
     ProjectsComponent,
-    SingleProjectComponent
+    SingleProjectComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -26,7 +28,7 @@ import { app_routing } from './app.routes';
     DataTableModule,
     app_routing
   ],
-  providers: [],
+  providers: [appRoutingProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
