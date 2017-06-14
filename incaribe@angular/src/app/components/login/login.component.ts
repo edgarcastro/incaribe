@@ -31,8 +31,8 @@ export class LoginComponent implements OnInit {
     this.identity = this._userService.getIdentity();
     this.token = this._userService.getToken();
 
-    console.log(this.identity);
-    console.log(this.token);
+    console.log(this.identity+'algo');
+    console.log(this.token+'algo9+');
     if(this.identity){
       this._router.navigate(['/projects']);
     }
@@ -72,7 +72,7 @@ export class LoginComponent implements OnInit {
 
                 localStorage.setItem('token', token);
                 this.user = new User('','','','','','ROLE_USER','');
-                this.goToProject();
+                location.reload();
               }
             },
 
@@ -80,7 +80,7 @@ export class LoginComponent implements OnInit {
               var errorMessage = <any>error;
 
               if(errorMessage!=null){
-                var body = JSON.parse(error._body);
+                var body = error._body;
                 this.errorMessage =body.message;
                 console.log(error);
               }
@@ -94,7 +94,7 @@ export class LoginComponent implements OnInit {
         var errorMessage = <any>error;
 
         if(errorMessage!=null){
-          var body = JSON.parse(error._body);
+          var body = error._body;
           this.errorMessage =body.message;
           console.log(error);
         }
