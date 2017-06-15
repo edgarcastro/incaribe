@@ -12,7 +12,7 @@ export class ProjectService {
   constructor(private http: Http) { }
 
   get all(): Promise<any>{
-    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': localStorage.token});
     let options = new RequestOptions({ headers: headers });
       return this.http.get(this.BASEURL+'/projects', options)
         .toPromise()
@@ -21,7 +21,7 @@ export class ProjectService {
   }
 
   getProject(id:String):Promise<any>{
-    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': localStorage.token});
     let options = new RequestOptions({ headers: headers });
       return this.http.get(`${this.BASEURL}/projects/${id}`, options)
         .toPromise()
@@ -30,7 +30,7 @@ export class ProjectService {
   }
 
   postProject(project: Project): Promise<any>{
-    let headers = new Headers({ 'Content-Type': 'application/json', 'token': sessionStorage.token });
+    let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': localStorage.token });
     let options = new RequestOptions({ headers: headers });
     return this.http
       .post(this.BASEURL+'/projects', {'project': project}, options)
@@ -40,7 +40,7 @@ export class ProjectService {
   }
 
   putProject(id:String, project: Project): Promise<any>{
-    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': localStorage.token});
     let options = new RequestOptions({ headers: headers });
     return this.http
       .put(`${this.BASEURL}/projects/${id}`, {'project': project}, options)
@@ -50,7 +50,7 @@ export class ProjectService {
   }
 
   deleteProject(id:String):Promise<any>{
-    let headers = new Headers({ 'Content-Type': 'application/json'});
+    let headers = new Headers({ 'Content-Type': 'application/json', 'Authorization': localStorage.token});
     let options = new RequestOptions({ headers: headers });
       return this.http.delete(`${this.BASEURL}/projects/${id}`, options)
         .toPromise()

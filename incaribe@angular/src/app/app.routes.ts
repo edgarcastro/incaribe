@@ -4,7 +4,7 @@ import { SingleProjectComponent } from './components/single-project/single-proje
 import { LoginComponent } from './components/login/login.component';
 
 const app_routes: Routes = [
-    { path: 'projects', component: ProjectsComponent},
+    /*{ path: 'projects', component: ProjectsComponent},*/
     { path: 'projects/:id', component: SingleProjectComponent},
     { path: '**', component: ProjectsComponent}
 ]
