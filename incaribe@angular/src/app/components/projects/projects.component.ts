@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DatePickerOptions, DateModel } from 'ng2-datepicker';
-import { ProjectsService } from './projects.service';
+import { ProjectService } from '../../services/project.service';
 import { Project } from '../../models/project.model'
 
 
@@ -9,18 +8,15 @@ import { Project } from '../../models/project.model'
   selector: 'projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css'],
-  providers: [ProjectsService]
+  providers: [ProjectService]
 })
 export class ProjectsComponent implements OnInit {
   project: Project;
   projects: Project[] = [];
-  date: DateModel;
-  options: DatePickerOptions;
   public sortBy = "name";
   public sortOrder = "asc";
 
-  constructor(private router: Router, private projectsService: ProjectsService) { 
-    this.options = new DatePickerOptions();
+  constructor(private router: Router, private projectService: ProjectService) { 
   }
 
   ngOnInit() {
@@ -29,10 +25,9 @@ export class ProjectsComponent implements OnInit {
   }
 
   load(){
-    this.projectsService.projects
+    this.projectService.all
     .then(res => {
       if(!res.error){
-        console.log(res.projects);
         this.projects = res.projects;
       }else{
         console.log(res);
@@ -45,17 +40,19 @@ export class ProjectsComponent implements OnInit {
   }
 
   save(){
-    console.log(this.project);
-    this.projectsService.postProject(this.project)
+    this.projectService.postProject(this.project)
       .then(res =>{
-        
         if(!res.error){
-        console.log(res.project);
         this.projects.push(res.project);
       }else{
         console.log(res);
       }
       });
   }
+
+  public selectedDate(value: any) {
+      this.project.startDate = new Date(value.start);
+      this.project.endDate = new Date(value.end);
+    }
 
 }

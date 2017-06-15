@@ -1,16 +1,17 @@
-import {Activity} from './activity.model'
+import {Activity} from './activity.model';
+
 export class Project {
+    _id: String;
     name: String;
     director: String;
     startDate: Date;
     endDate: Date;
-    activities: Activity[];
+    activity: Activity[];
 
     constructor(){
         this.name = '';
-        this.director = ''
         this.startDate = new Date();
         this.endDate = new Date();
-        this.activities = [];
+        this.activity = [];
     }
 }
